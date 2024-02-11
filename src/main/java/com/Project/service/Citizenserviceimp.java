@@ -35,9 +35,9 @@ public class Citizenserviceimp implements Citizenservice {
 	@Override
 	public boolean loginCitizen(Loginform loginform) {
 		
-		boolean status=citizenrepo.findByEmailAndPassword(loginform.getEmail(),loginform.getPassword());
+		Citizenreg status=citizenrepo.findByEmailAndPassword(loginform.getEmail(),loginform.getPassword());
 		
-		if(status==true)
+		if(status!=null)
 		{
 			return true;
 		}

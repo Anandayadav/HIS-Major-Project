@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Project.entity.Citizenreg;
+import com.Project.formbinding.Forgotpswrdform;
+import com.Project.formbinding.Loginform;
 import com.Project.service.Citizenserviceimp;
 
 @RestController
@@ -28,5 +30,44 @@ public class Citizenrestcontroller {
 		String accErrMsg="Please change the EmailId... ";
 		return accErrMsg;
 	}
+	
+	@PostMapping("/login")
+	public String LoginCitizen(@RequestBody Loginform loginform)
+	{
+		boolean status=citizenservice.loginCitizen(loginform);
+		
+		if(status==true)
+		{
+			String logSuccMsg="Login successful...";
+			return logSuccMsg;
+		}
+		
+		String logErrMsg="Please check the credentials...";
+		
+		return logErrMsg;
+		
+
+	}
+	
+	@PostMapping("/forgotPassword")
+	public String forgotPassword(@RequestBody Forgotpswrdform forgotpassword)
+	{
+		if (!forgotpassword.getNewpassword().equals(forgotpassword.getConfirmpassword()))		{
+			String duplicateEmail="New password and confirm password must be same..";
+			return duplicateEmail;
+		}
+		
+		boolean status=citizenservice.forgotPassword(forgotpassword);
+		
+		if(status==true)
+		{
+			String emailSentMsg="Password Sent to your email successfully...";
+			return emailSentMsg;
+		}
+		
+		String emailErrMsg="Please change your email...";
+		return emailErrMsg;
+	}
+	
 	
 }

@@ -10,5 +10,5 @@ public interface Citizenrepo extends JpaRepository<Citizenreg, Integer>{
 
 	public Citizenreg findByEmail(String email);
 	
-	public boolean findByEmailAndPassword(String email,String password);
+	public Citizenreg findByEmailAndPassword(String email,String password);
 }

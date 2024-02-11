@@ -25,7 +25,11 @@ public class Emailutils {
 		                   try {
 							helper.setTo(to);
 							 helper.setSubject(Subject);
-							 helper.setText(body);
+							 helper.setText(body, true);
+							 
+							 mailsender.send(message);
+							 
+							 isSent=true;
 						} catch (MessagingException e) {
 						
 							e.printStackTrace();

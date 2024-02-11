@@ -47,6 +47,7 @@ public class Citizenserviceimp implements Citizenservice {
 
 	@Override
 	public boolean forgotPassword(Forgotpswrdform forgotpswrdform) {
+		
 		Citizenreg found=citizenrepo.findByEmail(forgotpswrdform.getEmail());
 		
 		if(found!=null) {

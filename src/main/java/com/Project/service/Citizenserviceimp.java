@@ -20,6 +20,7 @@ public class Citizenserviceimp implements Citizenservice {
 	
 	@Override
 	public Citizenreg saveCitizen(Citizenreg citizen) {
+		
 		Citizenreg found=citizenrepo.findByEmail(citizen.getEmail());
 		
 		if(found!=null)
@@ -64,5 +65,20 @@ public class Citizenserviceimp implements Citizenservice {
 	
 		return false;
 	}
+
+
+	@Override
+	public boolean searchBySsn(String ssn) {
+     Citizenreg found=citizenrepo.findBySsn(ssn);
+     
+     if(found!=null)
+     {
+    	 return true;
+     }
+	return false;
+	
+	}
+
+
 
 }

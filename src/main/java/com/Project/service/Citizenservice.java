@@ -7,6 +7,8 @@ import com.Project.formbinding.Loginform;
 public interface Citizenservice {
 
 	public Citizenreg saveCitizen(Citizenreg citizen);
+
+	public boolean searchBySsn(String ssn);
 	
 	public boolean loginCitizen(Loginform loginform);
 	

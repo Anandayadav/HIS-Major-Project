@@ -19,15 +19,24 @@ public class Citizenrestcontroller {
 	@PostMapping("/saveCitizen")
 	public String SaveCitizen(@RequestBody Citizenreg citizenreg)
 	{
+		
+		
+		boolean ssnfound=citizenservice.searchBySsn(citizenreg.getSsn());
+		
+		if(ssnfound)
+		{
+			String ssnChangeMsg="Please verify your SSN number...";
+			return ssnChangeMsg;
+		}
+		
 		Citizenreg creg=citizenservice.saveCitizen(citizenreg);
 		
-	
-		if(creg.getSsn()==citizenreg.getSsn())
+		if(creg.getSsn().equals(citizenreg.getSsn()))
 		{
 			String accSuccMsg=creg.getName() +",  your account has created successfully...";
 			return accSuccMsg;
 		}
-		String accErrMsg="Please change the EmailId... ";
+		String accErrMsg="Please change your EmailID ";
 		return accErrMsg;
 	}
 	
@@ -46,14 +55,13 @@ public class Citizenrestcontroller {
 		
 		return logErrMsg;
 		
-
 	}
 	
 	@PostMapping("/forgotPassword")
 	public String forgotPassword(@RequestBody Forgotpswrdform forgotpassword)
 	{
-		if (!forgotpassword.getNewpassword().equals(forgotpassword.getConfirmpassword()))		{
-			String duplicateEmail="New password and confirm password must be same..";
+		if (!forgotpassword.getNewpassword().equals(forgotpassword.getConfirmpassword()))	{
+			String duplicateEmail="New password and confirm password must be same...";
 			return duplicateEmail;
 		}
 		
